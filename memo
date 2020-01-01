@@ -1,0 +1,47 @@
+# memo
+開発メモ
+
+# 手順
+
+## 元となるイメージのダウンロード
+```bash
+docker pull centos:centos8
+```
+
+## オリジナルイメージ作成
+Dockerfile を書く。
+
+`docker run -it centos:centos8 /bin/bash` でコマンドを流して確認しつつ、失敗したら `exit` して再度 `docker run` でやり直し、手順を作っていく。
+
+
+Dockerfile が完成したらビルド。
+```bash
+docker build -t iamapen/php74-centos8 .
+```
+
+キャッシュ無効のリビルドは
+```bash
+docker build --no-cache -t iamapen/php74-centos8 .
+```
+
+
+## 作業中のマウントについて
+ビルド(docker build)中にはホストボリュームをマウントすることはできないが、
+開発中には設定ファイルをバックアップするために Dockerfile のディレクトリをマウントするかもしれない。
+```bash
+docker run -it -v "C:/projects/docker_build/docker-php74-centos8:/hoge" --name hoge iamapen/php74-centos8
+```
+
+
+docker run -it --name php74-centos8-build \
+  -p 80:80 -p 443:443 \
+  -v "C:/projects/docker_build/docker-php74-centos8:/hoge" \
+  iamapen/php74-centos8
+
+
+docker run -it --name php74-centos8-build \
+  -p 80:80 -p 443:443 \
+  -v "C:/projects/docker_build/docker-php74-centos8:/hoge" \
+  iamapen/php74-centos8 \
+  bin/bash
+
