@@ -2,12 +2,12 @@ version: '3'
 
 services:
   mod-php:
-    build: mod-php
+    image: iamapen/php74-centos8
     volumes:
-      - ../src:/apps
+      - ../src:/var/www/html
     ports:
       - 80:80
       - 443:443
-    hostname: php73-study
-    container_name: php73-study
+    hostname: php74-study
+#    container_name: php74-study
 
