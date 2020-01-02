@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  mod-php:
+    build: mod-php
+    volumes:
+      - ../src:/apps
+    ports:
+      - 80:80
+      - 443:443
+    hostname: php73-study
+    container_name: php73-study
+

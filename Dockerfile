@@ -32,6 +32,13 @@ RUN set -x \
   && mv server.crt /etc/pki/tls/certs/localhost.crt \
   && chmod 755 -R /var/www/html
 
+# 設定ファイル
+COPY docker/etc/httpd/ /etc/httpd/
+COPY docker/etc/php.ini /etc/
+COPY docker/etc/php.d/ /etc/php.d/
+COPY docker/etc/php-zts.d/ /etc/php-zts.d/
+COPY docker/etc/php-fpm.conf /etc/
+COPY docker/etc/php-fpm.d/ /etc/php-fpm.d/
 
 EXPOSE 80
 EXPOSE 443
